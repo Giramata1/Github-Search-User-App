@@ -1,8 +1,8 @@
 import { FaSun, FaMoon } from "react-icons/fa";
-import { useTheme } from "./ThemeProvider"; // Ensure the correct import path
+import { useTheme } from "./ThemeProvider"; 
 
 function Header() {
-  const { theme, toggleDarkMode } = useTheme(); // Access the theme from context
+  const { theme, toggleDarkMode } = useTheme(); 
 
   return (
     <header className="flex justify-between items-center mb-8">
