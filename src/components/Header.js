@@ -1,0 +1,29 @@
+import { FaSun, FaMoon } from "react-icons/fa";
+import { useTheme } from "./ThemeProvider"; // Ensure the correct import path
+
+function Header() {
+  const { theme, toggleDarkMode } = useTheme(); // Access the theme from context
+
+  return (
+    <header className="flex justify-between items-center mb-8">
+      <h1 className="text-2xl font-bold text-black dark:text-white">devfinder</h1>
+
+      <button
+        onClick={toggleDarkMode}
+        className="flex items-center gap-2 text-sm font-bold tracking-widest text-gray-600 dark:text-white uppercase hover:text-blue-500 transition-colors"
+      >
+        {theme === "dark" ? (
+          <div>
+            Light <FaSun />
+          </div>
+        ) : (
+          <div>
+            Dark <FaMoon />
+          </div>
+        )}
+      </button>
+    </header>
+  );
+}
+
+export default Header;
