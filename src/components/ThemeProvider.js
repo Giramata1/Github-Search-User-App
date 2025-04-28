@@ -3,18 +3,16 @@ import { createContext, useContext, useEffect, useState } from "react";
 const ThemeContext = createContext();
 
 export function ThemeProvider({ children }) {
-  const [theme, setTheme] = useState("light");
-
+  const [theme, setTheme] = useState("dark"); 
 
   useEffect(() => {
-    const savedTheme = localStorage.getItem("theme");
-    if (savedTheme) {
-      setTheme(savedTheme);
-      document.documentElement.classList.add(savedTheme === "dark" ? "dark" : "light");
+    const savedTheme = localStorage.getItem("theme") || "dark";
+    setTheme(savedTheme);
+    
+    if (savedTheme === "dark") {
+      document.documentElement.classList.add("dark");
     } else {
-      const prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
-      setTheme(prefersDark ? "dark" : "light");
-      document.documentElement.classList.add(prefersDark ? "dark" : "light");
+      document.documentElement.classList.remove("dark");
     }
   }, []);
 
@@ -22,7 +20,12 @@ export function ThemeProvider({ children }) {
     const newTheme = theme === "dark" ? "light" : "dark";
     setTheme(newTheme);
     localStorage.setItem("theme", newTheme);
-    document.documentElement.classList.toggle("dark", newTheme === "dark");
+    
+    if (newTheme === "dark") {
+      document.documentElement.classList.add("dark");
+    } else {
+      document.documentElement.classList.remove("dark");
+    }
   };
 
   return (
